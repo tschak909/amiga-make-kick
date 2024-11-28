@@ -1,0 +1,11 @@
+lc1 -i:include/ -i:include/lattice/ MakeKick
+if not exists "MakeKick.q"
+    echo "Compile failed."
+    quit 20
+    endif
+lc2 -v MakeKick.q
+atom MakeKick.o MakeKick.atom.o -pc -cdb
+alink FROM LIB:AStartup.obj+MakeKick.atom.o TO MakeKick LIBRARY LIB:amiga.lib+LIB:lc.lib FASTER
+delete MakeKick.o
+delete MakeKick.atom.o
+echo "-- Compile complete --"
